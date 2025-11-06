@@ -20,7 +20,9 @@ def print_results(docs):
 
 def search_index(query: str, k: int = 5) -> None:
     vector_store = get_vector_store()
-    docs = vector_store.similarity_search_with_relevance_scores(query=query, k=k)
+    embeddings = get_embeddings()
+    query = embeddings.embed_query(query)
+    docs = vector_store.similarity_search_by_vector_with_relevance_scores(query, k=k)
     print_results(docs)
 
 def load_text(path:str)->str:
