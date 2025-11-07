@@ -1,22 +1,24 @@
-import json
+from typing import List
 from pathlib import Path
 
 from utils import get_vector_store, get_embeddings
 
 from langchain_community.document_loaders import TextLoader
+from langchain_core.documents import Document
 
-def print_results(docs):
-    print(json.dumps(
-        [
-            {
-                "score": float(s),
-                "id": getattr(d, "id", None),
-                "content": d.page_content,
-                "metadata": d.metadata
-            } for d,s in docs
-        ],
-        ensure_ascii=False, indent=2
-    ))
+def print_results(docs: List[Document]):
+    best_doc, best_score = docs[-1]
+    md = best_doc.metadata or {}
+    print(f'Best result: \t{best_doc.metadata["title"]}')
+    print(f'Confidence: \t{best_score:.3f}')
+    print(f'Authors: \t{best_doc.metadata["authors"]}')
+    print(f'Abstract:\n{best_doc.page_content}')
+    print()
+
+    if len(docs) > 1:
+        print("Other results:")
+        for doc, score in docs[-2::-1]:
+            print(f'- {doc.metadata["title"]} | Score: {score:.3f}')
 
 def search_index(query: str, k: int = 5) -> None:
     vector_store = get_vector_store()
