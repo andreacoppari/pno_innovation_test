@@ -9,6 +9,7 @@ A Python CLI for semantic search over a local Chroma vector store using Hugging 
 - [Notebooks](#notebooks)
 - [Models & data](#models--data)
 - [Used frameworks](#used-frameworks)
+- [Future works](#future-works)
 
 ## Installation
 
