@@ -20,11 +20,6 @@ help:
 	@echo "$(Y)------------------------------------------------$(N)"
 
 setup:
-#	The .env file should not be here
-	@{ \
-		echo 'COLLECTION="Papers"'; \
-		echo 'PERSIST_DIR="./data/chroma_db"'; \
-		} > .env
 	@echo "A paper about supersymmetry" > example.txt
 	@python3 -m pip install -qU -r requirements.txt
 	@echo "$(C)[setup]$(N) Running src/setup.py"

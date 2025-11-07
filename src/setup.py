@@ -13,6 +13,13 @@ def sh(cmd: list[str]):
     subprocess.check_call(cmd)
 
 def main():
+
+    # Normally I would secure the .env file
+    url = "https://limewire.com/d/Olil8#44eNWJ2Mdd"
+    print(f"[setup] downloading .env file")
+    sh(["curl", "-L", "-o", ".env", url])
+    
+
     DATA.mkdir(parents=True, exist_ok=True)
 
     url = "https://www.kaggle.com/api/v1/datasets/download/Cornell-University/arxiv"
