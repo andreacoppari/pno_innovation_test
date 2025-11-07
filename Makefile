@@ -9,10 +9,10 @@ N:=\033[0m
 .PHONY: help setup search index clean
 
 help:
-	@echo "$(Y)------------------------------------------------$(N)"
+	@echo "$(Y)--------------------------------------------$(N)"
 	@echo "$(Y)🚀 PNO Innovation - Semantic Search Tool$(N)"
-	@echo "$(Y)------------------------------------------------$(N)"
-	@echo "Use $(Y)make setup$(N) to install python dependencies, then use $(Y)make index$(N) to index the dataset."
+	@echo "$(Y)--------------------------------------------$(N)"
+	@echo "Use $(Y)make setup$(N) to install python dependencies, then use $(Y)make index$(N) to index the dataset. Use $(R)make clean$(N) to cleanup the working directory from data"
 	@echo ""
 	@echo "$(G)Search usage$(N):"
 	@echo "  $(Y)make search f=\"A paper about supersymmetry\"$(N)"

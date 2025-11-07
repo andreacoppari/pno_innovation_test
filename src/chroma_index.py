@@ -1,7 +1,5 @@
 import json
-import os
 
-from pathlib import Path
 from datetime import datetime
 
 from tqdm import tqdm
@@ -46,7 +44,7 @@ def normalized_authors(raw_authors: str | list | None) -> str:
 
 def paper_to_documents(paper: dict) -> list[Document]:
     '''
-    paper: The paper object from the dataset
+    paper:  The paper object from the dataset
 
     Returns a list of langchain.core.Document objects that can be stored in a vector db such as Chroma.
     Those objects contain chunks of papers' abstracts, that will be later retrieved using semantic similarity.
@@ -87,9 +85,12 @@ def paper_to_documents(paper: dict) -> list[Document]:
         )
     return docs
 
-def index_dataset(path: str):
-    
-    Path(os.getenv("PERSIST_DIR")).mkdir(parents=True, exist_ok=True)
+def index_dataset(path: str) -> None:
+    '''
+    path:   String containing the dataset file path.
+
+    It populates the Chroma vector database. The dataset must be in JSONL format.
+    '''
 
     with open(path, "r", encoding="utf-8") as fp:
         batch_docs = []

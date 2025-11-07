@@ -1,6 +1,10 @@
-import sys, subprocess
+import sys
+import subprocess
+import os
+
 from tqdm import tqdm
 from pathlib import Path
+from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
@@ -19,8 +23,12 @@ def main():
     print(f"[setup] downloading .env file")
     sh(["curl", "-L", "-o", ".env", url])
     
+    load_dotenv()
+
+    Path(os.getenv("PERSIST_DIR")).mkdir(parents=True, exist_ok=True)
 
     DATA.mkdir(parents=True, exist_ok=True)
+
 
     url = "https://www.kaggle.com/api/v1/datasets/download/Cornell-University/arxiv"
     print(f"[setup] downloading -> {ZIP}")

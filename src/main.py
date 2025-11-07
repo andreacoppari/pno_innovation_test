@@ -13,7 +13,7 @@ def main():
     p_index = sub.add_parser("index", help="Index data into vectordb")
     p_index.add_argument("data", nargs="?", default=None)
 
-    p_search = sub.add_parser("search", help="Search indexed corpus")  # no extra params [web:12]
+    p_search = sub.add_parser("search", help="Search indexed corpus")
     p_search.add_argument("query", type=str)
 
     args = parser.parse_args()
