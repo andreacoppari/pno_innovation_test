@@ -29,10 +29,10 @@ def load_text(path:str)->str:
     docs = TextLoader(path, encoding="utf-8", autodetect_encoding=True).load()
     return "\n".join(d.page_content for d in docs if d.page_content)
 
-def search_file(path: Path) -> None:
+def search_file(path: Path, k: int = 5) -> None:
     text = load_text(path)
     embeddings = get_embeddings()
     vectors = embeddings.embed_query(text)
     vector_store = get_vector_store(embeddings)
-    docs = vector_store.similarity_search_by_vector_with_relevance_scores(vectors, k=5)
+    docs = vector_store.similarity_search_by_vector_with_relevance_scores(vectors, k=k)
     print_results(docs)
