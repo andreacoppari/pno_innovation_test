@@ -10,8 +10,7 @@ def main():
     parser = argparse.ArgumentParser(description="PNO Innovation - Semantic Search Tool")
     sub = parser.add_subparsers(dest="command", required=True)
 
-    p_index = sub.add_parser("index", help="Index data into vectordb")
-    p_index.add_argument("data", nargs="?", default=None)
+    sub.add_parser("index", help="Index data into vectordb")
 
     p_search = sub.add_parser("search", help="Search indexed corpus")
     p_search.add_argument("query", type=str)
