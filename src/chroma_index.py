@@ -1,8 +1,10 @@
 import json
+import os
 
 from datetime import datetime
-
+from pathlib import Path
 from tqdm import tqdm
+from dotenv import load_dotenv
 
 from utils import get_vector_store, get_embeddings
 
@@ -94,6 +96,10 @@ def index_dataset(path: str) -> None:
 
     with open(path, "r", encoding="utf-8") as fp:
         batch_docs = []
+
+        load_dotenv()
+        Path(os.getenv("PERSIST_DIR")).mkdir(parents=True, exist_ok=True)
+        
         for line in tqdm(fp, desc="Indexing documents...", total=10000):
             paper = json.loads(line)
             docs = paper_to_documents(paper)
