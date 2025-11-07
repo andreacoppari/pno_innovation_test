@@ -21,7 +21,7 @@ help:
 
 setup:
 	@echo "A paper about supersymmetry" > example.txt
-	@python3 -m pip install -qU -r requirements.txt
+	python3 -m pip install -qU -r requirements.txt
 	@echo "$(C)[setup]$(N) Running src/setup.py"
 	@python3 src/setup.py
 
