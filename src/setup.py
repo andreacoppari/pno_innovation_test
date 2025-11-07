@@ -17,16 +17,19 @@ def sh(cmd: list[str]):
 
 def main():
 
-    # Normally I would secure the .env file
-    url = "https://limewire.com/d/Olil8#44eNWJ2Mdd"
-    print(f"[setup] downloading .env file")
-    sh(["curl", "-L", "-o", ".env", url])
+    # Normally I would secure the .env file on S3
+    with open(".env", "w") as fp:
+        fp.write(
+            'COLLECTION="Abstracts"\n' \
+            'PERSIST_DIR="./data/chroma_db"'
+            )
 
     DATA.mkdir(parents=True, exist_ok=True)
 
-    url = "https://www.kaggle.com/api/v1/datasets/download/Cornell-University/arxiv"
-    print(f"[setup] downloading -> {ZIP}")
-    sh(["curl", "-L", "-o", str(ZIP), url])
+    if not os.path.exists(JSONL):
+        url = "https://www.kaggle.com/api/v1/datasets/download/Cornell-University/arxiv"
+        print(f"[setup] downloading -> {ZIP}")
+        sh(["curl", "-L", "-o", str(ZIP), url])
 
     print(f"[setup] unzipping -> {DATA}")
     sh(["unzip", "-o", str(ZIP), "-d", str(DATA)])
