@@ -31,11 +31,12 @@ def main():
         print(f"[setup] downloading -> {ZIP}")
         sh(["curl", "-L", "-o", str(ZIP), url])
 
-    print(f"[setup] unzipping -> {DATA}")
-    sh(["unzip", "-o", str(ZIP), "-d", str(DATA)])
+    if os.path.exists(ZIP):
+        print(f"[setup] unzipping -> {DATA}")
+        sh(["unzip", "-o", str(ZIP), "-d", str(DATA)])
 
-    print(f"[setup] removing {ZIP}...")
-    sh(["rm", str(ZIP)])
+        print(f"[setup] removing {ZIP}...")
+        sh(["rm", str(ZIP)])
 
     src = DATA / "arxiv-metadata-oai-snapshot.json"
     if src.exists():
